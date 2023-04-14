@@ -13,7 +13,7 @@ const redis = require('redis');
 
 const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/ConfigExample';
 
-mongoose.connect(dbURL, (err) => {
+mongoose.connect(dbURL).catch(err => {
   if (err) {
     console.log('Could not connect to database');
     throw err;
@@ -59,7 +59,6 @@ app.engine('handlebars', expressHandlebars.engine({ defaultLayout: '' }));
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
 app.use(favicon(path.resolve(`${__dirname}/../client/img/favicon.png`)));
-app.use(cookieParser());
 
 router(app);
 
